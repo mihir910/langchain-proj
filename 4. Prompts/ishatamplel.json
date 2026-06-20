@@ -1,0 +1,17 @@
+{
+    "name": null,
+    "input_variables": [
+        "question1",
+        "question2",
+        "question3"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "You are a helpful assistant. Answer the following question: {question1} {question2} {question3}",
+    "template_format": "f-string",
+    "validate_template": false,
+    "_type": "prompt"
+}
