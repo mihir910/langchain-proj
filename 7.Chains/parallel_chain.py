@@ -21,25 +21,25 @@ model1 = ChatHuggingFace(llm=llm)
 model2 = ChatMistralAI(model="mistral-small")
 
 prompt1 = PromptTemplate(
-    template='give me 5 worst fights of \n {text}',
+    template='give me a summary on \n {text}',
     input_variables=['text']
 )
 
 prompt2 = PromptTemplate(
-    template='give me 5 best fights of {text}',
+    template='give me 10 quizes on {text}',
     input_variables=['text']
 )
 
 prompt3 = PromptTemplate(
-    template='Merge the provided fights into a single document \n worst -> {worst} and best -> {best}',
-    input_variables=['worst', 'best']
+    template='Merge the provided quizzes and summaries into a single document with showing headers and then the answers like Quiz:- ... , Summary:- ... \n quiz -> {quiz} and summary -> {summary}',
+    input_variables=[ 'quiz', 'summary']
 )
 
 parser = StrOutputParser()
 
 parallel_chain = RunnableParallel({
-    'worst': prompt1 | model1 | parser,
-    'best': prompt2 | model2 | parser
+    'summary': prompt1 | model1 | parser,
+    'quiz': prompt2 | model2 | parser
 })
 
 merge_chain = prompt3 | model1 | parser
@@ -53,5 +53,5 @@ result = chain.invoke({'text':text})
 
 print(result)
 
-chain.get_graph().print_ascii()
+# chain.get_graph().print_ascii()
 
